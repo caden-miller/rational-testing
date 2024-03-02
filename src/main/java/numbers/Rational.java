@@ -12,7 +12,7 @@ public class Rational
 
     public Rational(int a, int b) {  // added
         if (b == 0) {
-            throw new IllegalArgumentException("Denominator cannot be zero");
+            throw new IllegalArgumentException("Denominator of zero is undefined");
         }
         theNumerator = a / gcd(a, b);
         theDenominator = b / gcd(a, b);
@@ -40,7 +40,17 @@ public class Rational
 
     public Rational opposite() {
         return new Rational(-numerator(), denominator());
-    
+    }
+
+    public Rational reciprocal() {
+        if (numerator() == 0) {
+            throw new IllegalArgumentException("Reciprocal of zero is undefined");
+        }
+        return new Rational(denominator(), numerator());
+    }
+
+    public Rational times(Rational r) {
+        return new Rational(numerator() * r.numerator(), denominator() * r.denominator());
     }
 
     public int gcd(int a, int b) {

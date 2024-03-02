@@ -133,7 +133,7 @@ public class RationalTest
     }
 
 
-    public void testRationalopposite()
+    public void testRationalOpposite()
     {
         // Given that I have created the `Rational` value `2/3`
         Rational value = new Rational(2, 3);
@@ -143,6 +143,37 @@ public class RationalTest
         assertThat("the opposite of 2 is -2", opposite.numerator(), is(-2));
         // And the opposite's value should have denominator 3
         assertThat("the denominator should be 3", opposite.denominator(), is(3));
+    }
+
+    public void testRationalReciprocal() 
+    {
+        // Given that I have created the `Rational` value `2/3`
+        Rational value = new Rational(2, 3);
+        // When I create a `Rational` value as the reciprocal of the original `Rational` value
+        Rational reciprocal = value.reciprocal();
+        // Then the reciprocal's value should have numerator 3
+        assertThat("the numerator should be 3", reciprocal.numerator(), is(3));
+        // And the reciprocal's value should have denominator 2
+        assertThat("the denominator should be 2", reciprocal.denominator(), is(2));
+
+        // Fiven that I have created the 'Rational' value '0'
+        value = new Rational(0);
+        // Then the reciprocal of the value should throw an `IllegalArgumentException`
+        assertThrows(IllegalArgumentException.class, value::reciprocal);
+    }
+
+
+    public void testRationalTimes() {
+        // Given that I have created the `Rational` value `2/3`
+        Rational p = new Rational(2, 3);
+        // And I have created the `Rational` value `5/7`
+        Rational q = new Rational(5, 7);
+        // When I multiply the two `Rational` values
+        Rational result = p.times(q);
+        // Then the result's value should have numerator 10
+        assertThat("2 * 5 = 10", result.numerator(), is(10));
+        // And the result's value should have denominator 21
+        assertThat("3 * 7 = 21", result.denominator(), is(21));
     }
 
 
