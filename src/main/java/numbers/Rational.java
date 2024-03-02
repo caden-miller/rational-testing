@@ -11,25 +11,35 @@ public class Rational
     private int theDenominator;      // added
 
     public Rational(int a, int b) {  // added
-    theNumerator = a;
-    theDenominator = b;
+        if (b == 0) {
+            throw new IllegalArgumentException("Denominator cannot be zero");
+        }
+        theNumerator = a / gcd(a, b);
+        theDenominator = b / gcd(a, b);
     }
 
     public Rational(int a) {
-    theNumerator = a;
-    theDenominator = 1;           // added
-    }
+        this(a, 1);
+     }
 
     public Rational() {
-    this(0);
+        this(0);
     }
 
     public int numerator() {
-    return theNumerator;
+        return theNumerator;
     }
 
     public int denominator() {
-    return theDenominator;        // changed
+        return theDenominator;        // changed
     }
-    
+
+    public int gcd(int a, int b) {
+        if (b == 0) {
+            return a;
+        } else {
+            return gcd(b, a % b);
+        }
+    }
+
 }

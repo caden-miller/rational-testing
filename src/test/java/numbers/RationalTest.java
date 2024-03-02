@@ -5,6 +5,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThrows;
 
 /**
  * Unit test for simple App.
@@ -57,5 +58,59 @@ public class RationalTest
         assertThat("the numerator should be 2", value.numerator(), is(2));
         // And the value should have denominator `3`
         assertThat("the denominator should be 3", value.denominator(), is(3));
+
+        // Given I have created a `Rational` value using `48` and `-72`
+        value = new Rational(48, -72);
+        // Then the value should have numerator `-2`
+        assertThat("48 / -72 = -2 / 3", value.numerator(), is(-2));
+        // And the value should have denominator `3`
+        assertThat("48 / -72 = -2 / 3", value.denominator(), is(3));
+
+        // Given I have created a 'Rational' value using '1' and '0'
+        // Then the constructor should throw an `IllegalArgumentException`
+        assertThrows(IllegalArgumentException.class, () -> new Rational(1, 0));
+
+        // Given I have created a 'Rational' value using '-1' and '1'
+        value = new Rational(-1, 1);
+        // Then the value should have numerator `-1`
+        assertThat("the numerator should be -1", value.numerator(), is(-1));
+        // And the value should have denominator `1`
+        assertThat("the denominator should be 1", value.denominator(), is(1));
+
+        // Given I have created a 'Rational' value using '1' and '-1'
+        value = new Rational(1, -1);
+        // Then the value should have numerator `-1`
+        assertThat("the numerator should be -1", value.numerator(), is(-1));
+        // And the value should have denominator `1`
+        assertThat("the denominator should be 1", value.denominator(), is(1));
+
+        // Given I have created a 'Rational' value using '-1' and '-1'
+        value = new Rational(-1, -1);
+        // Then the value should have numerator `1`
+        assertThat("the numerator should be 1", value.numerator(), is(1));
+        // And the value should have denominator `1`
+        assertThat("the denominator should be 1", value.denominator(), is(1));
+
+        // Given I have created a 'Rational' value using '4' and '2'
+        value = new Rational(4, 2);
+        // Then the value should have numerator `2`
+        assertThat("the numerator should be 2", value.numerator(), is(2));
+        // And the value should have denominator `1`
+        assertThat("the denominator should be 1", value.denominator(), is(1));
+
+        // Given I have created a 'Rational' value using '2' and '4'
+        value = new Rational(2, 4);
+        // Then the value should have numerator `1`
+        assertThat("the numerator should be 1", value.numerator(), is(1));
+        // And the value should have denominator `2`
+        assertThat("the denominator should be 2", value.denominator(), is(2));
+
+        // Given I have created a 'Rational' value using '2' and '2'
+        value = new Rational(2, 2);
+        // Then the value should have numerator `1`
+        assertThat("the numerator should be 1", value.numerator(), is(1));
+        // And the value should have denominator `1`
+        assertThat("the denominator should be 1", value.denominator(), is(1));
+
     }
 }
