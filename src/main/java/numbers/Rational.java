@@ -14,8 +14,21 @@ public class Rational
         if (b == 0) {
             throw new IllegalArgumentException("Denominator of zero is undefined");
         }
-        theNumerator = a / gcd(a, b);
-        theDenominator = b / gcd(a, b);
+
+        int gcd = gcd(a, b);
+        boolean aEqualsMinValue = a == Integer.MIN_VALUE;
+        boolean bEqualsMinValue = b == Integer.MIN_VALUE;
+        if ((aEqualsMinValue &&
+            b == -1) ||
+            (a == -1 &&
+            bEqualsMinValue)) {
+            throw new IllegalArgumentException("Integer overflow error ");
+        }
+
+
+
+        theNumerator = a / gcd;
+        theDenominator = b / gcd;
     }
 
     public Rational(Rational r) {
@@ -46,11 +59,21 @@ public class Rational
         if (numerator() == 0) {
             throw new IllegalArgumentException("Reciprocal of zero is undefined");
         }
+        if (denominator() == Integer.MIN_VALUE) {
+            throw new IllegalArgumentException("Integer overflow error");
+        }
         return new Rational(denominator(), numerator());
     }
 
     public Rational times(Rational r) {
         return new Rational(numerator() * r.numerator(), denominator() * r.denominator());
+    }
+
+    public String toString() {
+        if (denominator() == 1) {
+            return Integer.toString(numerator());
+        }
+        return Integer.toString(numerator()) + "/" + Integer.toString(denominator());
     }
 
     public int gcd(int a, int b) {

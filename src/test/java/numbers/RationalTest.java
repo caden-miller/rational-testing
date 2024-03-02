@@ -117,6 +117,14 @@ public class RationalTest
         assertThat("the numerator should be 1", value.numerator(), is(1));
         // And the value should have denominator `1`
         assertThat("the denominator should be 1", value.denominator(), is(1));
+
+        // Given I have created a 'Rational' value using 'MIN_VALUE' and '-1'
+        // Then the constructor should throw an `IllegalArgumentException`
+        assertThrows(IllegalArgumentException.class, () -> new Rational(Integer.MIN_VALUE, -1));
+
+        // Given I have created a 'Rational' value using '-1' and 'MIN_VALUE'
+        // Then the constructor should throw an `IllegalArgumentException`
+        assertThrows(IllegalArgumentException.class, () -> new Rational(-1, Integer.MIN_VALUE));
     }
 
 
@@ -143,6 +151,11 @@ public class RationalTest
         assertThat("the opposite of 2 is -2", opposite.numerator(), is(-2));
         // And the opposite's value should have denominator 3
         assertThat("the denominator should be 3", opposite.denominator(), is(3));
+
+        // Given that I have created the `Rational` value `1/MIN_VALUE`
+        value = new Rational(1, Integer.MIN_VALUE);
+        // Then the opposite of the value should throw an `IllegalArgumentException`
+        assertThrows(IllegalArgumentException.class, value::opposite);
     }
 
     public void testRationalReciprocal() 
@@ -156,10 +169,17 @@ public class RationalTest
         // And the reciprocal's value should have denominator 2
         assertThat("the denominator should be 2", reciprocal.denominator(), is(2));
 
-        // Fiven that I have created the 'Rational' value '0'
+        // Given that I have created the 'Rational' value '0'
         value = new Rational(0);
         // Then the reciprocal of the value should throw an `IllegalArgumentException`
         assertThrows(IllegalArgumentException.class, value::reciprocal);
+
+        // Given that I have created the 'Rational' value '2/MIN_VALUE'
+        value = new Rational(1, Integer.MIN_VALUE);
+        System.out.println(value.toString());
+        // Then the reciprocal of the value should throw an `IllegalArgumentException`
+        // TODO
+         assertThrows(IllegalArgumentException.class, value::reciprocal);
     }
 
 
@@ -174,6 +194,22 @@ public class RationalTest
         assertThat("2 * 5 = 10", result.numerator(), is(10));
         // And the result's value should have denominator 21
         assertThat("3 * 7 = 21", result.denominator(), is(21));
+    }
+
+    public void testRationalToString() {
+        // Given that I have created the `Rational` value `2/3`
+        Rational value = new Rational(2, 3);
+        // When I convert the `Rational` value to a string
+        String result = value.toString();
+        // Then the result should be the string "2/3"
+        assertThat("the string should be 2/3", result, is("2/3"));
+
+        // Given that I have created the `Rational` value `2/1`
+        value = new Rational(2, 1);
+        // When I convert the `Rational` value to a string
+        result = value.toString();
+        // Then the result should be the string "2"
+        assertThat("the string should be 2", result, is("2"));
     }
 
 
