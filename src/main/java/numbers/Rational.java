@@ -38,6 +38,11 @@ public class Rational
         return theDenominator;        // changed
     }
 
+    public Rational opposite() {
+        return new Rational(-numerator(), denominator());
+    
+    }
+
     public int gcd(int a, int b) {
         if (b == 0) {
             return a;

@@ -34,7 +34,7 @@ public class RationalTest
     /**
      * Rigourous Test :-)
      */
-    public void testApp()
+    public void testRational()
     {
         // Given no preconditions
 
@@ -44,16 +44,22 @@ public class RationalTest
         assertThat("the numerator should be 0", value.numerator(), is(0));
         // And the value should have denominator 1
         assertThat("the denominator should be 1", value.denominator(), is(1));
+    }
 
+    public void testRationalInt() 
+    {
         // Given that I have constructed a `Rational` value using the argument `2`
-        value = new Rational(2);
+        Rational value = new Rational(2);
         // Then the value should have numerator `2`
         assertThat("the numerator should be 2", value.numerator(), is(2));
         // And the value should have denominator `1`
         assertThat("the denominator should be 1", value.denominator(), is(1));
+    }
 
-        // Given that I have created a Rational value using arguments `2`` and `3`
-        value = new Rational(2, 3);
+    public void testRationalIntInt()
+    {
+        // Given that I have created a Rational value using arguments `2` and `3`
+        Rational value = new Rational(2, 3);
         // Then the value should have numerator `2`
         assertThat("the numerator should be 2", value.numerator(), is(2));
         // And the value should have denominator `3`
@@ -111,15 +117,35 @@ public class RationalTest
         assertThat("the numerator should be 1", value.numerator(), is(1));
         // And the value should have denominator `1`
         assertThat("the denominator should be 1", value.denominator(), is(1));
+    }
 
+
+    public void testRationalRational()
+    {
         // Given that I have created the `Rational` value `2/3`
         Rational original = new Rational(2, 3);
         // When I create a `Rational` value as a copy of the original `Rational` value
-        value = new Rational(original);
+        Rational value = new Rational(original);
         // Then the copy's value should have numerator 2
         assertThat("the numerator should be 2", value.numerator(), is(2));
         // And the copy's value should have denominator 3
         assertThat("the denominator should be 3", value.denominator(), is(3));
-
     }
+
+
+    public void testRationalopposite()
+    {
+        // Given that I have created the `Rational` value `2/3`
+        Rational value = new Rational(2, 3);
+        // When I create a `Rational` value as the opposite of the original `Rational` value
+        Rational opposite = value.opposite();
+        // Then the opposite's value should have numerator -2
+        assertThat("the opposite of 2 is -2", opposite.numerator(), is(-2));
+        // And the opposite's value should have denominator 3
+        assertThat("the denominator should be 3", opposite.denominator(), is(3));
+    }
+
+
+
+
 }
