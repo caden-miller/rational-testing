@@ -7,8 +7,18 @@ package numbers;
 public class Rational 
 {
 
+    private int theNumerator;  // added
+
+    public Rational(int a) {   // added
+    theNumerator = a;
+    }
+
+    public Rational() {        // added
+    this(0);
+    }
+
     public int numerator() {
-        return 0;
+    return theNumerator;    // changed
     }
 
     public int denominator() {
