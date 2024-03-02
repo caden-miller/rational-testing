@@ -112,5 +112,14 @@ public class RationalTest
         // And the value should have denominator `1`
         assertThat("the denominator should be 1", value.denominator(), is(1));
 
+        // Given that I have created the `Rational` value `2/3`
+        Rational original = new Rational(2, 3);
+        // When I create a `Rational` value as a copy of the original `Rational` value
+        value = new Rational(original);
+        // Then the copy's value should have numerator 2
+        assertThat("the numerator should be 2", value.numerator(), is(2));
+        // And the copy's value should have denominator 3
+        assertThat("the denominator should be 3", value.denominator(), is(3));
+
     }
 }

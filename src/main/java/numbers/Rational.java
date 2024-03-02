@@ -18,9 +18,13 @@ public class Rational
         theDenominator = b / gcd(a, b);
     }
 
+    public Rational(Rational r) {
+        this(r.numerator(), r.denominator());
+    }
+
     public Rational(int a) {
         this(a, 1);
-     }
+    }
 
     public Rational() {
         this(0);
