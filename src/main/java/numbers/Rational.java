@@ -7,22 +7,29 @@ package numbers;
 public class Rational 
 {
 
-    private int theNumerator;  // added
+    private int theNumerator;
+    private int theDenominator;      // added
 
-    public Rational(int a) {   // added
+    public Rational(int a, int b) {  // added
     theNumerator = a;
+    theDenominator = b;
     }
 
-    public Rational() {        // added
+    public Rational(int a) {
+    theNumerator = a;
+    theDenominator = 1;           // added
+    }
+
+    public Rational() {
     this(0);
     }
 
     public int numerator() {
-    return theNumerator;    // changed
+    return theNumerator;
     }
 
     public int denominator() {
-        return 1;
+    return theDenominator;        // changed
     }
     public static void main( String[] args )
     {
