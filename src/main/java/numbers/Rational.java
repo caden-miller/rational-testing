@@ -31,8 +31,5 @@ public class Rational
     public int denominator() {
     return theDenominator;        // changed
     }
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
-    }
+    
 }
