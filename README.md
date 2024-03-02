@@ -1,3 +1,3 @@
 # Rational Testing
 
-Test-driven development of a Rational class in Java
+Rational class implementation in Java using test-driven development.

@@ -6,6 +6,14 @@ package numbers;
  */
 public class Rational 
 {
+
+    public int numerator() {
+        return 0;
+    }
+
+    public int denominator() {
+        return 1;
+    }
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
