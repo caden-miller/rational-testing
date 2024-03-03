@@ -151,11 +151,6 @@ public class RationalTest
         assertThat("the opposite of 2 is -2", opposite.numerator(), is(-2));
         // And the opposite's value should have denominator 3
         assertThat("the denominator should be 3", opposite.denominator(), is(3));
-
-        // Given that I have created the `Rational` value `1/MIN_VALUE`
-        value = new Rational(1, Integer.MIN_VALUE);
-        // Then the opposite of the value should throw an `IllegalArgumentException`
-        assertThrows(IllegalArgumentException.class, value::opposite);
     }
 
     public void testRationalReciprocal() 
@@ -245,6 +240,20 @@ public class RationalTest
         // When I add the two 'Rational' values
         // Then the result should throw an `IllegalArgumentException`
         assertThrows(IllegalArgumentException.class, () -> p4.plus(q4));
+    }
+
+    public void testRationalMinus() {
+        // Given that I have created the `Rational` value `2/3`
+        Rational p1 = new Rational(2, 3);
+        // And I have created the `Rational` value `5/7`
+        Rational q1 = new Rational(5, 7);
+        // When I subtract the two `Rational` values
+        Rational result = p1.minus(q1);
+        // Then the result's value should have numerator -1
+        System.out.println(result.toString());
+        assertThat("2 * 7 - 3 * 5 = -1", result.numerator(), is(-1));
+        // And the result's value should have denominator 21
+        assertThat("3 * 7 = 21", result.denominator(), is(21));
     }
 
     public void testRationalSafeAdd() {

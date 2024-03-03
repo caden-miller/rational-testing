@@ -15,7 +15,6 @@ public class Rational
             throw new IllegalArgumentException("Denominator of zero is undefined");
         }
 
-        int gcd = gcd(a, b);
         boolean aEqualsMinValue = a == Integer.MIN_VALUE;
         boolean bEqualsMinValue = b == Integer.MIN_VALUE;
         if ((aEqualsMinValue &&
@@ -25,8 +24,18 @@ public class Rational
             throw new IllegalArgumentException("Integer overflow error ");
         }
 
-        theNumerator = a / gcd;
-        theDenominator = b / gcd;
+        int gcd = gcd(a, b);
+        a /= gcd;
+        b /= gcd;
+        boolean isNegative = (a < 0 && b > 0) || (a > 0 && b < 0);
+        if (isNegative) {
+            theNumerator = -1 * Math.abs(a);
+            theDenominator = Math.abs(b);
+        }
+        else {
+            theNumerator = a;
+            theDenominator = b;
+        }
     }
 
     public Rational(Rational r) {
@@ -75,6 +84,10 @@ public class Rational
         int newNumerator = safeAdd(numeratorTerm1, numeratorTerm2);
         int newDenominator = safeMultiply(denominator(), r.denominator());
         return new Rational(newNumerator, newDenominator);
+    }
+
+    public Rational minus(Rational r) {
+        return plus(r.opposite());
     }
 
     public String toString() {
