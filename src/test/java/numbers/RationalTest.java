@@ -176,10 +176,8 @@ public class RationalTest
 
         // Given that I have created the 'Rational' value '2/MIN_VALUE'
         value = new Rational(1, Integer.MIN_VALUE);
-        System.out.println(value.toString());
         // Then the reciprocal of the value should throw an `IllegalArgumentException`
-        // TODO
-         assertThrows(IllegalArgumentException.class, value::reciprocal);
+        assertThrows(IllegalArgumentException.class, value::reciprocal);
     }
 
 
@@ -210,6 +208,113 @@ public class RationalTest
         result = value.toString();
         // Then the result should be the string "2"
         assertThat("the string should be 2", result, is("2"));
+    }
+
+    public void testRationalPlus() {
+        // Given that I have created the `Rational` value `2/3`
+        Rational p1 = new Rational(2, 3);
+        // And I have created the `Rational` value `5/7`
+        Rational q1 = new Rational(5, 7);
+        // When I add the two `Rational` values
+        Rational result = p1.plus(q1);
+        // Then the result's value should have numerator 29
+        assertThat("2 * 7 + 3 * 5 = 29", result.numerator(), is(29));
+        // And the result's value should have denominator 21
+        assertThat("3 * 7 = 21", result.denominator(), is(21));
+
+        // Given that I have created the 'Rational' value '2/1'
+        Rational p2 = new Rational(2, 1);
+        // And I have created the 'Rational' value '1/MAX_VALUE'
+        Rational q2 = new Rational(1, Integer.MAX_VALUE);
+        // When I add the two 'Rational' values
+        // Then the result should throw an `IllegalArgumentException`
+        assertThrows(IllegalArgumentException.class, () -> p2.plus(q2));
+
+        // Given that I have created the 'Rational' value '-1/1'
+        Rational p3 = new Rational(-2, 1);
+        // And I have created the 'Rational' value '-1/MAX_VALUE'
+        Rational q3 = new Rational(-1, Integer.MAX_VALUE);
+        // When I add the two 'Rational' values
+        // Then the result should throw an `IllegalArgumentException`
+        assertThrows(IllegalArgumentException.class, () -> p3.plus(q3));
+
+        // Given that I have created the 'Rational' value '-1/1'
+        Rational p4 = new Rational(-1, 1);
+        // And I have created the 'Rational' value '1/MIN_VALUE'
+        Rational q4 = new Rational(1, Integer.MIN_VALUE);
+        // When I add the two 'Rational' values
+        // Then the result should throw an `IllegalArgumentException`
+        assertThrows(IllegalArgumentException.class, () -> p4.plus(q4));
+    }
+
+    public void testRationalSafeAdd() {
+        // Given that I have the integers 1 && 1
+        // When I add the two integers
+        // Then the result should be 2
+        assertThat("1 + 1 = 2", new Rational().safeAdd(1, 1), is(2));
+
+        // Given that I have the integers 1 && MAX_VALUE
+        // When I add the two integers
+        // Then the result should throw an `IllegalArgumentException`
+        assertThrows(IllegalArgumentException.class, () -> new Rational().safeAdd(1, Integer.MAX_VALUE));
+        
+        // Given that I have the integers -1 && MIN_VALUE
+        // When I add the two integers
+        // Then the result should throw an `IllegalArgumentException`
+        assertThrows(IllegalArgumentException.class, () -> new Rational().safeAdd(-1, Integer.MIN_VALUE));
+
+    }
+
+    public void testRationalSafeMultiply() {
+        // Given that I have the integers 1 && 1
+        // When I multiply the two integers
+        // Then the result should be 1
+        assertThat("1 * 1 = 1", new Rational().safeMultiply(1, 1), is(1));
+
+        // Given that I have the integers 0 && 1
+        // When I multiply the two integers
+        // Then the result should be 0
+        assertThat("0 * 1 = 0", new Rational().safeMultiply(0, 1), is(0));
+
+        // Given that I have the integers 1 && 0
+        // When I multiply the two integers
+        // Then the result should be 0
+        assertThat("1 * 0 = 0", new Rational().safeMultiply(1, 0), is(0));
+
+        // Given that I have the integers 1 && -1
+        // When I multiply the two integers
+        // Then the result should be -1
+        assertThat("1 * -1 = -1", new Rational().safeMultiply(1, -1), is(-1));
+
+        // Given that I have the integers -2 && -1
+        // When I multiply the two integers
+        // Then the result should be 2
+        assertThat("-2 * -1 = 2", new Rational().safeMultiply(-2, -1), is(2));
+
+        // Given that I have the integers 2 && MAX_VALUE
+        // When I multiply the two integers
+        // Then the result should throw an `IllegalArgumentException`
+        assertThrows(IllegalArgumentException.class, () -> new Rational().safeMultiply(2, Integer.MAX_VALUE));
+
+        // Given that I have the integers 2 && MIN_VALUE
+        // When I multiply the two integers
+        // Then the result should throw an `IllegalArgumentException`
+        assertThrows(IllegalArgumentException.class, () -> new Rational().safeMultiply(2, Integer.MIN_VALUE));
+        
+        // Given that I have the integers -2 && MIN_VALUE
+        // When I multiply the two integers
+        // Then the result should throw an `IllegalArgumentException`
+        assertThrows(IllegalArgumentException.class, () -> new Rational().safeMultiply(-2, Integer.MIN_VALUE));
+
+        // Given that I have the integers -2 && MAX_VALUE
+        // When I multiply the two integers
+        // Then the result should throw an `IllegalArgumentException`
+        assertThrows(IllegalArgumentException.class, () -> new Rational().safeMultiply(-2, Integer.MAX_VALUE));
+
+        // Given that I have the integers -1 && MIN_VALUE
+        // When I multiply the two integers
+        // Then the result should throw an `IllegalArgumentException`
+        assertThrows(IllegalArgumentException.class, () -> new Rational().safeMultiply(-1, Integer.MIN_VALUE));
     }
 
 

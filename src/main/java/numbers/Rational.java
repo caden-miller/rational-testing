@@ -25,8 +25,6 @@ public class Rational
             throw new IllegalArgumentException("Integer overflow error ");
         }
 
-
-
         theNumerator = a / gcd;
         theDenominator = b / gcd;
     }
@@ -69,6 +67,16 @@ public class Rational
         return new Rational(numerator() * r.numerator(), denominator() * r.denominator());
     }
 
+    public Rational plus(Rational r) {
+        // a/b + c/d = (ad + bc)/bd
+        // use safe operations to avoid overflow
+        int numeratorTerm1 = safeMultiply(numerator(), r.denominator());
+        int numeratorTerm2 = safeMultiply(r.numerator(), denominator());
+        int newNumerator = safeAdd(numeratorTerm1, numeratorTerm2);
+        int newDenominator = safeMultiply(denominator(), r.denominator());
+        return new Rational(newNumerator, newDenominator);
+    }
+
     public String toString() {
         if (denominator() == 1) {
             return Integer.toString(numerator());
@@ -82,6 +90,33 @@ public class Rational
         } else {
             return gcd(b, a % b);
         }
+    }
+
+    public int safeAdd(int a, int b) {
+        if (a > 0 && b > Integer.MAX_VALUE - a) {
+            throw new IllegalArgumentException("Integer overflow error");
+        }
+        if (a < 0 && b < Integer.MIN_VALUE - a) {
+            throw new IllegalArgumentException("Integer overflow error");
+        }
+        return a + b;
+    }
+
+    public int safeMultiply(int a, int b) {
+        if (a > 0 && 
+            (b > Integer.MAX_VALUE / a || 
+            b < Integer.MIN_VALUE / a)) {
+            throw new IllegalArgumentException("Integer overflow error");
+        }
+        if (a < -1 && 
+            (b < Integer.MAX_VALUE / a || 
+            b > Integer.MIN_VALUE / a)) {
+            throw new IllegalArgumentException("Integer overflow error");
+        }
+        if (a == -1 && b == Integer.MIN_VALUE) {
+            throw new IllegalArgumentException("Integer overflow error");
+        }
+        return a * b;
     }
 
 }
