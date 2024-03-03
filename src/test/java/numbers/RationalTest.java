@@ -189,6 +189,19 @@ public class RationalTest
         assertThat("3 * 7 = 21", result.denominator(), is(21));
     }
 
+    public void testRationalDividedBy() {
+        // Given that I have created the `Rational` value `2/3`
+        Rational p = new Rational(2, 3);
+        // And I have created the `Rational` value `5/7`
+        Rational q = new Rational(5, 7);
+        // When I divide the two `Rational` values
+        Rational result = p.dividedBy(q);
+        // Then the result's value should have numerator 14
+        assertThat("2 * 7 = 14", result.numerator(), is(14));
+        // And the result's value should have denominator 15
+        assertThat("3 * 5 = 15", result.denominator(), is(15));
+    }
+
     public void testRationalToString() {
         // Given that I have created the `Rational` value `2/3`
         Rational value = new Rational(2, 3);

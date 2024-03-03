@@ -72,10 +72,6 @@ public class Rational
         return new Rational(denominator(), numerator());
     }
 
-    public Rational times(Rational r) {
-        return new Rational(numerator() * r.numerator(), denominator() * r.denominator());
-    }
-
     public Rational plus(Rational r) {
         // a/b + c/d = (ad + bc)/bd
         // use safe operations to avoid overflow
@@ -88,6 +84,14 @@ public class Rational
 
     public Rational minus(Rational r) {
         return plus(r.opposite());
+    }
+
+    public Rational times(Rational r) {
+        return new Rational(safeMultiply(numerator(), r.numerator()), safeMultiply(denominator(), r.denominator()));
+    }
+
+    public Rational dividedBy(Rational r) {
+        return times(r.reciprocal());
     }
 
     public String toString() {
