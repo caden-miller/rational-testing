@@ -526,6 +526,12 @@ public class RationalTest
         // Then the result should be `true`
         assertThat("0/1 is zero", value.isZero(), is(true));
 
+        // Given that I have created the 'Rational' value '0/2'
+        value = new Rational(0, 2);
+        // When I check if the value is zero
+        // Then the result should be `true`
+        assertThat("0/2 is zero", value.isZero(), is(true));
+
         // Given that I have created the 'Rational' value '1/1'
         value = new Rational(1, 1);
         // When I check if the value is zero
@@ -539,6 +545,12 @@ public class RationalTest
         // When I check if the value is one
         // Then the result should be `true`
         assertThat("1/1 is one", value.isOne(), is(true));
+
+        // Given that I have created the 'Rational' value '1/2'
+        value = new Rational(1, 2);
+        // When I check if the value is one
+        // Then the result should be `false`
+        assertThat("1/2 is not one", value.isOne(), is(false));
 
         // Given that I have created the 'Rational' value '2/1'
         value = new Rational(2, 1);
@@ -559,6 +571,12 @@ public class RationalTest
         // When I check if the value is minus one
         // Then the result should be `true`
         assertThat("1/-1 is minus one", value.isMinusOne(), is(true));
+
+        // Given that I have created the 'Rational' value '-1/2'
+        value = new Rational(-1, 2);
+        // When I check if the value is minus one
+        // Then the result should be `false`
+        assertThat("-1/2 is not minus one", value.isMinusOne(), is(false));
 
         // Given that I have created the 'Rational' value '1/1'
         value = new Rational(1, 1);

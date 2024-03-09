@@ -194,15 +194,15 @@ public class Rational extends Number implements Comparable<Number>
     }
 
     public boolean isZero() { 
-        return numerator() == 0;
+        return numerator() == 0 && denominator() == 1;
     }
 
     public boolean isOne() { 
-        return numerator() == 1;
+        return numerator() == 1 && denominator() == 1;
     }
 
     public boolean isMinusOne() { 
-        return numerator() == -1;
+        return numerator() == -1 && denominator() == 1;
     }
 
     public String toString() {
