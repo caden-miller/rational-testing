@@ -665,6 +665,38 @@ public class RationalTest
         assertThat("(Rational)2/1.doubleValue() == 2.0 / 1.0", result, is((double)2.0 / 1.0));
     }
 
+    public void testRationalByteValue() {
+        // Given that I have created the `Rational` value `2/3`
+        Rational value = new Rational(2, 3);
+        // When I convert the `Rational` value to a byte
+        byte result = value.byteValue();
+        // Then the result should be 0
+        assertThat("(Rational)2/3.byteValue() == 2/3", result, is((byte)(value.numerator() / value.denominator())));
+
+        // Given that I have created the `Rational` value `2/1`
+        value = new Rational(2, 1);
+        // When I convert the `Rational` value to a byte
+        result = value.byteValue();
+        // Then the result should be 2
+        assertThat("(Rational)2/1.byteValue() == 2/1", result, is((byte)(value.numerator() / value.denominator())));
+    }
+
+    public void testRationalShortValue() {
+        // Given that I have created the `Rational` value `2/3`
+        Rational value = new Rational(2, 3);
+        // When I convert the `Rational` value to a short
+        short result = value.shortValue();
+        // Then the result should be 0
+        assertThat("(Rational)2/3.shortValue() == 2/3", result, is((short)(value.numerator() / value.denominator())));
+
+        // Given that I have created the `Rational` value `2/1`
+        value = new Rational(2, 1);
+        // When I convert the `Rational` value to a short
+        result = value.shortValue();
+        // Then the result should be 2
+        assertThat("(Rational)2/1.shortValue() == 2/1", result, is((short)(value.numerator() / value.denominator())));
+    }
+
     public void testRationalSafeAdd() {
         // Given that I have the integers 1 && 1
         // When I add the two integers

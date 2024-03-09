@@ -235,6 +235,16 @@ public class Rational extends Number implements Comparable<Number>
         return (double) numerator() / denominator();
     }
 
+    @Override
+    public byte byteValue() {
+        return (byte) intValue();
+    }
+
+    @Override
+    public short shortValue() {
+        return (short) intValue();
+    }
+
 
     /*****************************************/
     /*          Helper Functions             */
