@@ -4,12 +4,15 @@ package numbers;
  * Hello world!
  *
  */
-public class Rational 
+public class Rational extends Number implements Comparable<Number> 
 {
 
     private int theNumerator;
     private int theDenominator;      // added
 
+    /************************************/
+    /*          Constructors            */
+    /************************************/
     public Rational() {
         this(0);
     }
@@ -50,6 +53,9 @@ public class Rational
         this(r.numerator(), r.denominator());
     }
 
+    /****************************/
+    /*          Getters         */
+    /****************************/
     public int numerator() {
         return theNumerator;
     }
@@ -58,6 +64,9 @@ public class Rational
         return theDenominator;        // changed
     }
 
+    /****************************/
+    /*          Methods         */
+    /****************************/
     public Rational opposite() {
         return new Rational(-numerator(), denominator());
     }
@@ -113,7 +122,8 @@ public class Rational
         return times(raisedToThePowerOf(n - 1));
     }
 
-    public boolean equals(Object o) { // TODO
+    @Override
+    public boolean equals(Object o) { 
         if (o == null) {
             return false;
         }
@@ -121,9 +131,24 @@ public class Rational
             Rational r = (Rational) o;
             return (numerator() == r.numerator()) && (denominator() == r.denominator());
         }
-        else {
-            return false;
+        else if (o instanceof Float) {
+            return (float) numerator() / denominator() == (float) o;
         }
+        else {
+            return (double) numerator() / denominator() == (double) o;
+        }
+    }
+
+    @Override
+    public int compareTo(Number n) {
+        if (n instanceof Float) {
+            float thisValue = (float) numerator() / denominator();
+            float otherValue = n.floatValue();
+            return Float.compare(thisValue, otherValue);
+        }
+        double thisValue = (double) numerator() / denominator();
+        double otherValue = n.doubleValue();
+        return Double.compare(thisValue, otherValue);
     }
 
     public boolean greaterThan(Number n) { 
@@ -184,6 +209,33 @@ public class Rational
         return Integer.toString(numerator()) + "/" + Integer.toString(denominator());
     }
 
+    /*****************************************/
+    /*          Overridden Methods           */
+    /*****************************************/
+    @Override
+    public int intValue() {
+        return numerator() / denominator();
+    }
+
+    @Override
+    public long longValue() {
+        return (long) numerator() / denominator();
+    }
+
+    @Override
+    public float floatValue() {
+        return (float) numerator() / denominator();
+    }
+
+    @Override
+    public double doubleValue() {
+        return (double) numerator() / denominator();
+    }
+
+
+    /*****************************************/
+    /*          Helper Functions             */
+    /*****************************************/
     public int gcd(int a, int b) {
         if (b == 0) {
             return a;
@@ -218,5 +270,4 @@ public class Rational
         }
         return a * b;
     }
-
 }

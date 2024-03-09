@@ -318,15 +318,73 @@ public class RationalTest
         Double value3 = 2.0 / 3.0;
         // When I compare the two 'Object's values
         // Then the result should be `false`
-        assertThat("(Rational)2/3 != (Double)2/3", value1.equals(value3), is(false));
+        assertThat("(Rational)2/3 == (Double)2/3", value1.equals(value3), is(true));
+
+        // Given that I have created the 'Rational' value '2/3'
+        value1 = new Rational(2, 3);
+        // And I have created the 'Float' value '2/3'
+        Float value4 = 2.0f / 3.0f;
+        // When I compare the two 'Object's values
+        // Then the result should be `false`
+        assertThat("(Rational)2/3 == (Float)2/3", value1.equals(value4), is(true));
 
         // Given that I have created the 'Rational' value '2/3'
         value1 = new Rational(2, 3);
         // And I have created the 'Rational' value 'null'
-        Rational value4 = null;
+        Rational value5 = null;
         // When I compare the two 'Rational' values
         // Then the result should be `false`
-        assertThat("2/3 != null", value1.equals(value4), is(false));
+        assertThat("2/3 != null", value1.equals(value5), is(false));
+    }
+
+    public void testRationalCompareTo() {
+        // Given that I have created the 'Rational' value '2/3'
+        Rational value1 = new Rational(2, 3);
+        // And I have created the 'Rational' value '2/3'
+        Rational value2 = new Rational(2, 3);
+        // When I compare the two 'Rational' values
+        // Then the result should be `0`
+        assertThat("2/3 == 2/3", value1.compareTo(value2), is(0));
+
+        // Given that I have created the 'Rational' value '2/3'
+        value1 = new Rational(2, 3);
+        // And I have created the 'Rational' value '3/2'
+        value2 = new Rational(3, 2);
+        // When I compare the two 'Rational' values
+        // Then the result should be `-1`
+        assertThat("2/3 < 3/2", value1.compareTo(value2), is(-1));
+
+        // Given that I have created the 'Rational' value '2/3'
+        value1 = new Rational(2, 3);
+        // And I have created the 'Rational' value '1/3'
+        value2 = new Rational(1, 3);
+        // When I compare the two 'Rational' values
+        // Then the result should be `1`
+        assertThat("2/3 > 1/3", value1.compareTo(value2), is(1));
+
+        // Given that I have created the 'Rational' value '2/3'
+        value1 = new Rational(2, 3);
+        // And I have created the 'Float' value '2/3'
+        Float value3 = 2.0f / 3.0f;
+        // When I compare the two 'Object's values
+        // Then the result should be `0`
+        assertThat("(Rational)2/3 == (Float)2/3", value1.compareTo(value3), is(0));
+
+        // Given that I have created the 'Rational' value '2/3'
+        value1 = new Rational(2, 3);
+        // And I have created the 'Float' value '3/2'
+        value3 = 3.0f / 2.0f;
+        // When I compare the two 'Object's values
+        // Then the result should be `-1`
+        assertThat("(Rational)2/3 < (Float)3/2", value1.compareTo(value3), is(-1));
+
+        // Given that I have created the 'Rational' value '2/3'
+        value1 = new Rational(2, 3);
+        // And I have created the 'Float' value '1/3'
+        value3 = 1.0f / 3.0f;
+        // When I compare the two 'Object's values
+        // Then the result should be `1`
+        assertThat("(Rational)2/3 > (Float)1/3", value1.compareTo(value3), is(1));
     }
 
     public void testRationalGreaterThan() {
@@ -523,6 +581,70 @@ public class RationalTest
         result = value.toString();
         // Then the result should be the string "2"
         assertThat("the string should be 2", result, is("2"));
+    }
+
+    public void testRationalIntValue() {
+        // Given that I have created the `Rational` value `2/3`
+        Rational value = new Rational(2, 3);
+        // When I convert the `Rational` value to an integer
+        int result = value.intValue();
+        // Then the result should be 0
+        assertThat("(Rational)2/3.intValue() == 2/3", result, is(value.numerator() / value.denominator()));
+
+        // Given that I have created the `Rational` value `2/1`
+        value = new Rational(2, 1);
+        // When I convert the `Rational` value to an integer
+        result = value.intValue();
+        // Then the result should be 2
+        assertThat("(Rational)2/1.intValue() == 2/1", result, is(value.numerator() / value.denominator()));
+    }
+
+    public void testRationalLongValue() {
+        // Given that I have created the `Rational` value `2/3`
+        Rational value = new Rational(2, 3);
+        // When I convert the `Rational` value to a long
+        long result = value.longValue();
+        // Then the result should be 0
+        assertThat("(Rational)2/3.longValue() == 2/3", result, is((long)value.numerator() / value.denominator()));
+
+        // Given that I have created the `Rational` value `2/1`
+        value = new Rational(2, 1);
+        // When I convert the `Rational` value to a long
+        result = value.longValue();
+        // Then the result should be 2
+        assertThat("(Rational)2/1.longValue() == 2/1", result, is((long)value.numerator() / value.denominator()));
+    }
+
+    public void testRationalFloatValue() {
+        // Given that I have created the `Rational` value `2/3`
+        Rational value = new Rational(2, 3);
+        // When I convert the `Rational` value to a float
+        float result = value.floatValue();
+        // Then the result should be 0.6666667
+        assertThat("(Rational)2/3.floatValue() == 2.0f / 3.0f", result, is(2.0f / 3.0f));
+
+        // Given that I have created the `Rational` value `2/1`
+        value = new Rational(2, 1);
+        // When I convert the `Rational` value to a float
+        result = value.floatValue();
+        // Then the result should be 2.0
+        assertThat("(Rational)2/1.floatValue() == 2.0f / 1.0f", result, is(2.0f / 1.0f));
+    }
+
+    public void testRationalDoubleValue() {
+        // Given that I have created the `Rational` value `2/3`
+        Rational value = new Rational(2, 3);
+        // When I convert the `Rational` value to a double
+        double result = value.doubleValue();
+        // Then the result should be 0.6666666666666666
+        assertThat("(Rational)2/3.doubleValue() == 2.0 / 3.0", result, is(2.0 / 3.0));
+
+        // Given that I have created the `Rational` value `2/1`
+        value = new Rational(2, 1);
+        // When I convert the `Rational` value to a double
+        result = value.doubleValue();
+        // Then the result should be 2.0
+        assertThat("(Rational)2/1.doubleValue() == 2.0 / 1.0", result, is((double)2.0 / 1.0));
     }
 
     public void testRationalSafeAdd() {
