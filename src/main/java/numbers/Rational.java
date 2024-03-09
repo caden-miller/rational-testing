@@ -10,6 +10,14 @@ public class Rational
     private int theNumerator;
     private int theDenominator;      // added
 
+    public Rational() {
+        this(0);
+    }
+
+    public Rational(int a) {
+        this(a, 1);
+    }
+
     public Rational(int a, int b) {  // added
         if (b == 0) {
             throw new IllegalArgumentException("Denominator of zero is undefined");
@@ -40,14 +48,6 @@ public class Rational
 
     public Rational(Rational r) {
         this(r.numerator(), r.denominator());
-    }
-
-    public Rational(int a) {
-        this(a, 1);
-    }
-
-    public Rational() {
-        this(0);
     }
 
     public int numerator() {
@@ -91,8 +91,68 @@ public class Rational
     }
 
     public Rational dividedBy(Rational r) {
+        if (r.numerator() == 0) {
+            throw new IllegalArgumentException("Division by zero is undefined");
+        }
         return times(r.reciprocal());
     }
+
+    public Rational raisedToThePowerOf(int n) {
+        if (n < 0 && numerator() == 0) {
+            throw new IllegalArgumentException("Zero raised to a negative power is undefined");
+        }
+        if (n < 0) {
+            return reciprocal().raisedToThePowerOf(-n);
+        }
+        if (n == 0) {
+            return new Rational(1);
+        }
+        if (n == 1) {
+            return this;
+        }
+        return times(raisedToThePowerOf(n - 1));
+    }
+
+    public boolean equals(Object o) { // TODO
+        if (o == null) {
+            return false;
+        }
+        else if (o instanceof Rational) {
+            Rational r = (Rational) o;
+            return (numerator() == r.numerator()) && (denominator() == r.denominator());
+        }
+        else {
+            return false;
+        }
+    }
+
+    // public boolean greaterThan(Number n) { // TODO
+    //     return true;
+    // }
+
+    // public boolean greaterThan(Rational r) {
+    //     return tru3/2e;
+    // }
+
+    // public boolean lessThan(Number n) { // TODO
+    //     return true;
+    // }
+
+    // public boolean lessThan(Rational r) { // TODO
+    //     return true;
+    // }
+
+    // public boolean isZero() { // TODO
+    //     return true;
+    // }
+
+    // public boolean isOne() { // TODO
+    //     return true;
+    // }
+
+    // public boolean isMinusOne() { // TODO
+    //     return true;
+    // }
 
     public String toString() {
         if (denominator() == 1) {

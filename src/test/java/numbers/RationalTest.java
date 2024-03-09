@@ -175,49 +175,6 @@ public class RationalTest
         assertThrows(IllegalArgumentException.class, value::reciprocal);
     }
 
-
-    public void testRationalTimes() {
-        // Given that I have created the `Rational` value `2/3`
-        Rational p = new Rational(2, 3);
-        // And I have created the `Rational` value `5/7`
-        Rational q = new Rational(5, 7);
-        // When I multiply the two `Rational` values
-        Rational result = p.times(q);
-        // Then the result's value should have numerator 10
-        assertThat("2 * 5 = 10", result.numerator(), is(10));
-        // And the result's value should have denominator 21
-        assertThat("3 * 7 = 21", result.denominator(), is(21));
-    }
-
-    public void testRationalDividedBy() {
-        // Given that I have created the `Rational` value `2/3`
-        Rational p = new Rational(2, 3);
-        // And I have created the `Rational` value `5/7`
-        Rational q = new Rational(5, 7);
-        // When I divide the two `Rational` values
-        Rational result = p.dividedBy(q);
-        // Then the result's value should have numerator 14
-        assertThat("2 * 7 = 14", result.numerator(), is(14));
-        // And the result's value should have denominator 15
-        assertThat("3 * 5 = 15", result.denominator(), is(15));
-    }
-
-    public void testRationalToString() {
-        // Given that I have created the `Rational` value `2/3`
-        Rational value = new Rational(2, 3);
-        // When I convert the `Rational` value to a string
-        String result = value.toString();
-        // Then the result should be the string "2/3"
-        assertThat("the string should be 2/3", result, is("2/3"));
-
-        // Given that I have created the `Rational` value `2/1`
-        value = new Rational(2, 1);
-        // When I convert the `Rational` value to a string
-        result = value.toString();
-        // Then the result should be the string "2"
-        assertThat("the string should be 2", result, is("2"));
-    }
-
     public void testRationalPlus() {
         // Given that I have created the `Rational` value `2/3`
         Rational p1 = new Rational(2, 3);
@@ -267,6 +224,125 @@ public class RationalTest
         assertThat("2 * 7 - 3 * 5 = -1", result.numerator(), is(-1));
         // And the result's value should have denominator 21
         assertThat("3 * 7 = 21", result.denominator(), is(21));
+    }
+
+    public void testRationalTimes() {
+        // Given that I have created the `Rational` value `2/3`
+        Rational p = new Rational(2, 3);
+        // And I have created the `Rational` value `5/7`
+        Rational q = new Rational(5, 7);
+        // When I multiply the two `Rational` values
+        Rational result = p.times(q);
+        // Then the result's value should have numerator 10
+        assertThat("2 * 5 = 10", result.numerator(), is(10));
+        // And the result's value should have denominator 21
+        assertThat("3 * 7 = 21", result.denominator(), is(21));
+    }
+
+    public void testRationalDividedBy() {
+        // Given that I have created the `Rational` value `2/3`
+        Rational p = new Rational(2, 3);
+        // And I have created the `Rational` value `5/7`
+        Rational q = new Rational(5, 7);
+        // When I divide the two `Rational` values
+        Rational result = p.dividedBy(q);
+        // Then the result's value should have numerator 14
+        assertThat("2 * 7 = 14", result.numerator(), is(14));
+        // And the result's value should have denominator 15
+        assertThat("3 * 5 = 15", result.denominator(), is(15));
+
+        // Given that I have created the 'Rational' value '1/1'
+        Rational p2 = new Rational(1, 1);
+        // And I have created the 'Rational' value '0/1'
+        Rational q2 = new Rational(0, 1);
+        // When I divide the two 'Rational' values
+        // Then the result should throw an `IllegalArgumentException`
+        assertThrows(IllegalArgumentException.class, () -> p2.dividedBy(q2));
+    }
+
+    public void testRaisedToThePowerOf() {
+        // Given that I have created the `Rational` value `2/3`
+        Rational value1 = new Rational(2, 3);
+        // When I raise the `Rational` value to the power of 3
+        Rational result = value1.raisedToThePowerOf(3);
+        // Then the result's value should have numerator 8
+        assertThat("2 * 2 * 2 = 8", result.numerator(), is(8));
+        // And the result's value should have denominator 27
+        assertThat("3 * 3 * 3 = 27", result.denominator(), is(27));
+
+        // Given that I have created the `Rational` value `2/3`
+        value1 = new Rational(2, 3);
+        // When I raise the `Rational` value to the power of 0
+        result = value1.raisedToThePowerOf(0);
+        // Then the result's value should have numerator 1
+        assertThat("2^0 = 1", result.numerator(), is(1));
+        // And the result's value should have denominator 1
+        assertThat("3^0 = 1", result.denominator(), is(1));
+
+        // Given that I have created the `Rational` value `2/3`
+        value1 = new Rational(2, 3);
+        // When I raise the `Rational` value to the power of -3
+        result = value1.raisedToThePowerOf(-3);
+        // Then the result's value should have numerator 27
+        assertThat("3 * 3 * 3 = 27", result.numerator(), is(27));
+        // And the result's value should have denominator 8
+        assertThat("2 * 2 * 2 = 8", result.denominator(), is(8));
+
+        // Given that I have created the `Rational` value `0/1`
+        Rational value2 = new Rational(0, 1);
+        // When I raise the `Rational` value to the power of -1
+        // Then the result should throw an `IllegalArgumentException`
+        assertThrows(IllegalArgumentException.class, () -> value2.raisedToThePowerOf(-1));
+    }
+
+    public void testRationalEquals() {
+        // Given that I have created the 'Rational' value '2/3'
+        Rational value1 = new Rational(2, 3);
+        // And I have created the 'Rational' value '2/3'
+        Rational value2 = new Rational(2, 3);
+        // When I compare the two 'Rational' values
+        // Then the result should be `true`
+        assertThat("2/3 == 2/3", value1.equals(value2), is(true));
+
+        // Given that I have created the 'Rational' value '2/3'
+        value1 = new Rational(2, 3);
+        // And I have created the 'Rational' value '3/2'
+        value2 = new Rational(3, 2);
+        // When I compare the two 'Rational' values
+        // Then the result should be `false`
+        assertThat("2/3 != 3/2", value1.equals(value2), is(false));
+
+        // Given that I have created the 'Rational' value '2/3'
+        value1 = new Rational(2, 3);
+        // And I have created the 'Double' value '2/3'
+        Double value3 = 2.0 / 3.0;
+        // When I compare the two 'Object's values
+        // Then the result should be `false`
+        assertThat("(Rational)2/3 != (Double)2/3", value1.equals(value3), is(false));
+
+        // Given that I have created the 'Rational' value '2/3'
+        value1 = new Rational(2, 3);
+        // And I have created the 'Rational' value 'null'
+        Rational value4 = null;
+        // When I compare the two 'Rational' values
+        // Then the result should be `false`
+        assertThat("2/3 != null", value1.equals(value4), is(false));
+    }
+
+    public void testRationalToString() {
+        // Given that I have created the `Rational` value `2/3`
+        Rational value = new Rational(2, 3);
+        // When I convert the `Rational` value to a string
+        String result = value.toString();
+        // Then the result should be the string "2/3"
+        assertThat("the string should be 2/3", result, is("2/3"));
+
+        // Given that I have created the `Rational` value `2/1`
+        value = new Rational(2, 1);
+        // When I convert the `Rational` value to a string
+        result = value.toString();
+        // Then the result should be the string "2"
+        assertThat("the string should be 2", result, is("2"));
     }
 
     public void testRationalSafeAdd() {
