@@ -489,9 +489,25 @@ public class RationalTest
         assertThat("2/1 is not one", value.isOne(), is(false));
     }
 
-    // public void testRationalIsMinusOne() {
+    public void testRationalIsMinusOne() {
+        // Given that I have created the 'Rational' value '-1/1'
+        Rational value = new Rational(-1, 1);
+        // When I check if the value is minus one
+        // Then the result should be `true`
+        assertThat("-1/1 is minus one", value.isMinusOne(), is(true));
 
-    // }
+        // Given that I have created the 'Rational' value '1/-1'
+        value = new Rational(1, -1);
+        // When I check if the value is minus one
+        // Then the result should be `true`
+        assertThat("1/-1 is minus one", value.isMinusOne(), is(true));
+
+        // Given that I have created the 'Rational' value '1/1'
+        value = new Rational(1, 1);
+        // When I check if the value is minus one
+        // Then the result should be `false`
+        assertThat("1/1 is not minus one", value.isMinusOne(), is(false));
+    }
 
     public void testRationalToString() {
         // Given that I have created the `Rational` value `2/3`

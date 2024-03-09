@@ -173,9 +173,9 @@ public class Rational
         return numerator() == 1;
     }
 
-    // public boolean isMinusOne() { // TODO
-    //     return true;
-    // }
+    public boolean isMinusOne() { 
+        return numerator() == -1;
+    }
 
     public String toString() {
         if (denominator() == 1) {
