@@ -165,13 +165,13 @@ public class Rational
             safeMultiply(r.numerator(), denominator());
     }
 
-    // public boolean isZero() { // TODO
-    //     return true;
-    // }
+    public boolean isZero() { 
+        return numerator() == 0;
+    }
 
-    // public boolean isOne() { // TODO
-    //     return true;
-    // }
+    public boolean isOne() { 
+        return numerator() == 1;
+    }
 
     // public boolean isMinusOne() { // TODO
     //     return true;

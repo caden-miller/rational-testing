@@ -461,6 +461,38 @@ public class RationalTest
         assertThat("2/3 < null", value1.lessThan(value5), is(false));
     }
 
+    public void testRationalIsZero() {
+        // Given that I have created the 'Rational' value '0/1'
+        Rational value = new Rational(0, 1);
+        // When I check if the value is zero
+        // Then the result should be `true`
+        assertThat("0/1 is zero", value.isZero(), is(true));
+
+        // Given that I have created the 'Rational' value '1/1'
+        value = new Rational(1, 1);
+        // When I check if the value is zero
+        // Then the result should be `false`
+        assertThat("1/1 is not zero", value.isZero(), is(false));
+    }
+
+    public void testRationalIsOne() {
+        // Given that I have created the 'Rational' value '1/1'
+        Rational value = new Rational(1, 1);
+        // When I check if the value is one
+        // Then the result should be `true`
+        assertThat("1/1 is one", value.isOne(), is(true));
+
+        // Given that I have created the 'Rational' value '2/1'
+        value = new Rational(2, 1);
+        // When I check if the value is one
+        // Then the result should be `false`
+        assertThat("2/1 is not one", value.isOne(), is(false));
+    }
+
+    // public void testRationalIsMinusOne() {
+
+    // }
+
     public void testRationalToString() {
         // Given that I have created the `Rational` value `2/3`
         Rational value = new Rational(2, 3);
