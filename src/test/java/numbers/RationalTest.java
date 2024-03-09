@@ -318,7 +318,7 @@ public class RationalTest
         Double value3 = 2.0 / 3.0;
         // When I compare the two 'Object's values
         // Then the result should be `false`
-        assertThat("(Rational)2/3 == (Double)2/3", value1.equals(value3), is(true));
+        assertThat("(Rational)2/3 != (Double)2/3", value1.equals(value3), is(false));
 
         // Given that I have created the 'Rational' value '2/3'
         value1 = new Rational(2, 3);
@@ -326,7 +326,7 @@ public class RationalTest
         Float value4 = 2.0f / 3.0f;
         // When I compare the two 'Object's values
         // Then the result should be `false`
-        assertThat("(Rational)2/3 == (Float)2/3", value1.equals(value4), is(true));
+        assertThat("(Rational)2/3 != (Float)2/3", value1.equals(value4), is(false));
 
         // Given that I have created the 'Rational' value '2/3'
         value1 = new Rational(2, 3);

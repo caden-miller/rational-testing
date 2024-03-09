@@ -131,11 +131,14 @@ public class Rational extends Number implements Comparable<Number>
             Rational r = (Rational) o;
             return (numerator() == r.numerator()) && (denominator() == r.denominator());
         }
-        else if (o instanceof Float) {
-            return (float) numerator() / denominator() == (float) o;
-        }
+        // else if (o instanceof Float) {
+        //     return (float) numerator() / denominator() == (float) o;
+        // }
+        // else {
+        //     return (double) numerator() / denominator() == (double) o;
+        // }
         else {
-            return (double) numerator() / denominator() == (double) o;
+            return false;
         }
     }
 
