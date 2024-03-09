@@ -126,13 +126,20 @@ public class Rational
         }
     }
 
-    // public boolean greaterThan(Number n) { // TODO
-    //     return true;
-    // }
+    public boolean greaterThan(Number n) { 
+        if (n == null) {
+            return false;
+        }
+        return (double) numerator() / denominator() > n.doubleValue();
+    }
 
-    // public boolean greaterThan(Rational r) {
-    //     return tru3/2e;
-    // }
+    public boolean greaterThan(Rational r) {
+        if (r == null) {
+            return false;
+        }
+        return safeMultiply(numerator(), r.denominator()) > 
+            safeMultiply(r.numerator(), denominator());
+    }
 
     // public boolean lessThan(Number n) { // TODO
     //     return true;
