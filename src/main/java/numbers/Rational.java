@@ -130,6 +130,9 @@ public class Rational
         if (n == null) {
             return false;
         }
+        else if (n instanceof Float) {
+            return (float) numerator() / denominator() > n.floatValue();
+        }
         return (double) numerator() / denominator() > n.doubleValue();
     }
 
@@ -141,13 +144,26 @@ public class Rational
             safeMultiply(r.numerator(), denominator());
     }
 
-    // public boolean lessThan(Number n) { // TODO
-    //     return true;
-    // }
+    public boolean lessThan(Number n) { 
+        if (n == null) {
+            return false;
+        }
+        else if (n instanceof Float) {
+            return (float) numerator() / denominator() < n.floatValue();
+        }
+        else {
+            return (double) numerator() / denominator() < n.doubleValue();
+        }
+        
+    }
 
-    // public boolean lessThan(Rational r) { // TODO
-    //     return true;
-    // }
+    public boolean lessThan(Rational r) { 
+        if (r == null) {
+            return false;
+        }
+        return safeMultiply(numerator(), r.denominator()) < 
+            safeMultiply(r.numerator(), denominator());
+    }
 
     // public boolean isZero() { // TODO
     //     return true;
