@@ -29,13 +29,10 @@ public class Rational extends Number implements Comparable<Number>
         boolean aEqualsMinValue = a == Integer.MIN_VALUE;
         boolean bEqualsMinValue = b == Integer.MIN_VALUE;
         if ((aEqualsMinValue && b == -1) ||
-            (a == -1 && bEqualsMinValue)) {
+            (a == -1 && bEqualsMinValue) ||
+            (aEqualsMinValue && bEqualsMinValue)) {
             throw new IllegalArgumentException("Integer overflow error");
         }
-        else if (aEqualsMinValue && bEqualsMinValue) {
-            throw new IllegalArgumentException("Integer overflow error");
-        }
-
 
         int gcd = gcd(a, b);
         a /= gcd;
@@ -143,7 +140,10 @@ public class Rational extends Number implements Comparable<Number>
 
     @Override
     public int compareTo(Number n) {
-        if (n instanceof Float) {
+        if (n == null) {
+            throw new NullPointerException("Number is null");
+        }
+        else if (n instanceof Float) {
             float thisValue = (float) numerator() / denominator();
             float otherValue = n.floatValue();
             return Float.compare(thisValue, otherValue);

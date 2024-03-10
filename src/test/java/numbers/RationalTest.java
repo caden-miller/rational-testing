@@ -72,6 +72,13 @@ public class RationalTest
         // And the value should have denominator `3`
         assertThat("48 / -72 = -2 / 3", value.denominator(), is(3));
 
+        // Given I have created a `Rational` value using `-48` and `-72`
+        value = new Rational(-48, -72);
+        // Then the value should have numerator `2`
+        assertThat("-48 / -72 = 2 / 3", value.numerator(), is(2));
+        // And the value should have denominator `3`
+        assertThat("-48 / -72 = 2 / 3", value.denominator(), is(3));
+
         // Given I have created a 'Rational' value using '1' and '0'
         // Then the constructor should throw an `IllegalArgumentException`
         assertThrows(IllegalArgumentException.class, () -> new Rational(1, 0));
@@ -389,6 +396,14 @@ public class RationalTest
         // When I compare the two 'Object's values
         // Then the result should be `1`
         assertThat("(Rational)2/3 > (Float)1/3", value1.compareTo(value3), is(1));
+
+        // Given that I have created the 'Rational' value '2/3'
+        // And I have created the 'Rational' value 'null'
+        // When I compare the two 'Rational' values
+        // Then the result should throw a "NullPointerException"
+        Rational value4 = new Rational(2, 3);
+        Rational value5 = null;
+        assertThrows(NullPointerException.class, () -> value4.compareTo(value5));
     }
 
     public void testRationalGreaterThan() {
