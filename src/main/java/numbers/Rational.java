@@ -74,7 +74,7 @@ public class Rational extends Number implements Comparable<Number>
         if (numerator() == 0) {
             throw new IllegalArgumentException("Reciprocal of zero is undefined");
         }
-        if (denominator() == Integer.MIN_VALUE) {
+        if (denominator() == Integer.MIN_VALUE || numerator() == Integer.MIN_VALUE) {
             throw new IllegalArgumentException("Integer overflow error");
         }
         return new Rational(denominator(), numerator());

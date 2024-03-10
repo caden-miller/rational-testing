@@ -180,10 +180,15 @@ public class RationalTest
         // Then the reciprocal of the value should throw an `IllegalArgumentException`
         assertThrows(IllegalArgumentException.class, value::reciprocal);
 
-        // Given that I have created the 'Rational' value '2/MIN_VALUE'
+        // Given that I have created the 'Rational' value '1/MIN_VALUE'
         value = new Rational(1, Integer.MIN_VALUE);
         // Then the reciprocal of the value should throw an `IllegalArgumentException`
         assertThrows(IllegalArgumentException.class, value::reciprocal);
+
+        // Given that I have created the 'Rational' value 'MIN_VALUE/1' 
+        value = new Rational(Integer.MIN_VALUE, 1);
+        // Then the reciprocal of the value should throw an 'IllegalArgumentException'
+
     }
 
     public void testRationalPlus() {
