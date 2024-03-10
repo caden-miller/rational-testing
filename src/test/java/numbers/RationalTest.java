@@ -409,6 +409,14 @@ public class RationalTest
         Rational value4 = new Rational(2, 3);
         Rational value5 = null;
         assertThrows(NullPointerException.class, () -> value4.compareTo(value5));
+
+        // Given that I have created the 'Rational' value '2/3'
+        value1 = new Rational(2, 3);
+        // And I have created the 'Integer' value '1/3'
+        Integer value6 = 2 / 3;
+        // When I compare the two 'Object's values
+        // Then the result should be `0`
+        assertThat("(Rational)2/3 == (Integer)2/3", value1.compareTo(value6), is(0));
     }
 
     public void testRationalGreaterThan() {

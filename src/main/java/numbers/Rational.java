@@ -143,6 +143,11 @@ public class Rational extends Number implements Comparable<Number>
         if (n == null) {
             throw new NullPointerException("Number is null");
         }
+        else if (n instanceof Integer) {
+            Integer thisValue = numerator() / denominator();
+            Integer otherValue = n.intValue();
+            return Integer.compare(thisValue, otherValue);
+        }
         else if (n instanceof Float) {
             float thisValue = (float) numerator() / denominator();
             float otherValue = n.floatValue();
