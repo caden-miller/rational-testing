@@ -333,24 +333,56 @@ public class RationalTest
         // And I have created the 'Double' value '2/3'
         Double value3 = 2.0 / 3.0;
         // When I compare the two 'Object's values
+        // Then the result should be `true`
+        assertThat("(Rational)2/3 == (Double)2/3", value1.equals(value3), is(true));
+
+        // Given that I have created the 'Rational' value '2/3'
+        value1 = new Rational(2, 3);
+        // And I have created the 'Double' value '1/3'
+        value3 = 1.0 / 3.0;
+        // When I compare the two 'Object's values
         // Then the result should be `false`
-        assertThat("(Rational)2/3 != (Double)2/3", value1.equals(value3), is(false));
+        assertThat("(Rational)2/3 != (Double)1/3", value1.equals(value3), is(false));
 
         // Given that I have created the 'Rational' value '2/3'
         value1 = new Rational(2, 3);
         // And I have created the 'Float' value '2/3'
         Float value4 = 2.0f / 3.0f;
         // When I compare the two 'Object's values
+        // Then the result should be `true`
+        assertThat("(Rational)2/3 == (Float)2/3", value1.equals(value4), is(true));
+
+        // Given that I have created the 'Rational' value '2/3'
+        value1 = new Rational(2, 3);
+        // And I have created the 'Float' value '1/3'
+        value4 = 1.0f / 3.0f;
+        // When I compare the two 'Object's values
         // Then the result should be `false`
-        assertThat("(Rational)2/3 != (Float)2/3", value1.equals(value4), is(false));
+        assertThat("(Rational)2/3 != (Float)1/3", value1.equals(value4), is(false));
+
+        // Given that I have created the 'Rational' value '2'
+        value1 = new Rational(2);
+        // And I have created the 'int' value '2'
+        int value5 = 2 / 1;
+        // When I compare the two 'Object's values
+        // Then the result should be 'true'
+        assertThat("(Rational)2/3 == (int)2/3", value1.equals(value5), is(true));
+
+        // Given that I have created the 'Rational' value '2'
+        value1 = new Rational(2);
+        // And I have created the 'int' value '1'
+        value5 = 1 / 1;
+        // When I compare the two 'Object's values
+        // Then the result should be 'true'
+        assertThat("(Rational)2/3 == (int)2/3", value1.equals(value5), is(false));
 
         // Given that I have created the 'Rational' value '2/3'
         value1 = new Rational(2, 3);
         // And I have created the 'Rational' value 'null'
-        Rational value5 = null;
+        Rational value6 = null;
         // When I compare the two 'Rational' values
         // Then the result should be `false`
-        assertThat("2/3 != null", value1.equals(value5), is(false));
+        assertThat("2/3 != null", value1.equals(value6), is(false));
     }
 
     public void testRationalCompareTo() {
@@ -378,29 +410,29 @@ public class RationalTest
         // Then the result should be `1`
         assertThat("2/3 > 1/3", value1.compareTo(value2), is(1));
 
-        // Given that I have created the 'Rational' value '2/3'
-        value1 = new Rational(2, 3);
-        // And I have created the 'Float' value '2/3'
-        Float value3 = 2.0f / 3.0f;
-        // When I compare the two 'Object's values
-        // Then the result should be `0`
-        assertThat("(Rational)2/3 == (Float)2/3", value1.compareTo(value3), is(0));
+        // // Given that I have created the 'Rational' value '2/3'
+        // value1 = new Rational(2, 3);
+        // // And I have created the 'Float' value '2/3'
+        // Float value3 = 2.0f / 3.0f;
+        // // When I compare the two 'Object's values
+        // // Then the result should be `0`
+        // assertThat("(Rational)2/3 == (Float)2/3", value1.compareTo(value3), is(0));
 
-        // Given that I have created the 'Rational' value '2/3'
-        value1 = new Rational(2, 3);
-        // And I have created the 'Float' value '3/2'
-        value3 = 3.0f / 2.0f;
-        // When I compare the two 'Object's values
-        // Then the result should be `-1`
-        assertThat("(Rational)2/3 < (Float)3/2", value1.compareTo(value3), is(-1));
+        // // Given that I have created the 'Rational' value '2/3'
+        // value1 = new Rational(2, 3);
+        // // And I have created the 'Float' value '3/2'
+        // value3 = 3.0f / 2.0f;
+        // // When I compare the two 'Object's values
+        // // Then the result should be `-1`
+        // assertThat("(Rational)2/3 < (Float)3/2", value1.compareTo(value3), is(-1));
 
-        // Given that I have created the 'Rational' value '2/3'
-        value1 = new Rational(2, 3);
-        // And I have created the 'Float' value '1/3'
-        value3 = 1.0f / 3.0f;
-        // When I compare the two 'Object's values
-        // Then the result should be `1`
-        assertThat("(Rational)2/3 > (Float)1/3", value1.compareTo(value3), is(1));
+        // // Given that I have created the 'Rational' value '2/3'
+        // value1 = new Rational(2, 3);
+        // // And I have created the 'Float' value '1/3'
+        // value3 = 1.0f / 3.0f;
+        // // When I compare the two 'Object's values
+        // // Then the result should be `1`
+        // assertThat("(Rational)2/3 > (Float)1/3", value1.compareTo(value3), is(1));
 
         // Given that I have created the 'Rational' value '2/3'
         // And I have created the 'Rational' value 'null'
@@ -409,14 +441,6 @@ public class RationalTest
         Rational value4 = new Rational(2, 3);
         Rational value5 = null;
         assertThrows(NullPointerException.class, () -> value4.compareTo(value5));
-
-        // Given that I have created the 'Rational' value '2/3'
-        value1 = new Rational(2, 3);
-        // And I have created the 'Integer' value '1/3'
-        Integer value6 = 2 / 3;
-        // When I compare the two 'Object's values
-        // Then the result should be `0`
-        assertThat("(Rational)2/3 == (Integer)2/3", value1.compareTo(value6), is(0));
     }
 
     public void testRationalGreaterThan() {

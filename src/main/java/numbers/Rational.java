@@ -127,14 +127,14 @@ public class Rational extends Number implements Comparable<Number>
             Rational r = (Rational) o;
             return (numerator() == r.numerator()) && (denominator() == r.denominator());
         }
-        // else if (o instanceof Float) {
-        //     return (float) numerator() / denominator() == (float) o;
-        // }
-        // else {
-        //     return (double) numerator() / denominator() == (double) o;
-        // }
+        else if (o instanceof Integer) {
+            return (numerator() == (int) o && denominator() == 1);
+        }
+        else if (o instanceof Float) {
+            return Math.abs((float) numerator() / denominator() - (float) o) < Math.pow(2, -20);
+        }
         else {
-            return false;
+            return Math.abs((double) numerator() / denominator() - (double) o) < Math.pow(2, -40);
         }
     }
 
@@ -143,16 +143,11 @@ public class Rational extends Number implements Comparable<Number>
         if (n == null) {
             throw new NullPointerException("Number is null");
         }
-        else if (n instanceof Integer) {
-            Integer thisValue = numerator() / denominator();
-            Integer otherValue = n.intValue();
-            return Integer.compare(thisValue, otherValue);
-        }
-        else if (n instanceof Float) {
-            float thisValue = (float) numerator() / denominator();
-            float otherValue = n.floatValue();
-            return Float.compare(thisValue, otherValue);
-        }
+        // else if (n instanceof Float) {
+        //     float thisValue = (float) numerator() / denominator();
+        //     float otherValue = n.floatValue();
+        //     return Float.compare(thisValue, otherValue);
+        // }
         double thisValue = (double) numerator() / denominator();
         double otherValue = n.doubleValue();
         return Double.compare(thisValue, otherValue);
