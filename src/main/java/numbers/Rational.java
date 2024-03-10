@@ -8,7 +8,7 @@ public class Rational extends Number implements Comparable<Number>
 {
 
     private int theNumerator;
-    private int theDenominator;      // added
+    private int theDenominator;      
 
     /************************************/
     /*          Constructors            */
@@ -21,19 +21,21 @@ public class Rational extends Number implements Comparable<Number>
         this(a, 1);
     }
 
-    public Rational(int a, int b) {  // added
+    public Rational(int a, int b) {  
         if (b == 0) {
             throw new IllegalArgumentException("Denominator of zero is undefined");
         }
 
         boolean aEqualsMinValue = a == Integer.MIN_VALUE;
         boolean bEqualsMinValue = b == Integer.MIN_VALUE;
-        if ((aEqualsMinValue &&
-            b == -1) ||
-            (a == -1 &&
-            bEqualsMinValue)) {
-            throw new IllegalArgumentException("Integer overflow error ");
+        if ((aEqualsMinValue && b == -1) ||
+            (a == -1 && bEqualsMinValue)) {
+            throw new IllegalArgumentException("Integer overflow error");
         }
+        else if (aEqualsMinValue && bEqualsMinValue) {
+            throw new IllegalArgumentException("Integer overflow error");
+        }
+
 
         int gcd = gcd(a, b);
         a /= gcd;
@@ -61,7 +63,7 @@ public class Rational extends Number implements Comparable<Number>
     }
 
     public int denominator() {
-        return theDenominator;        // changed
+        return theDenominator;        
     }
 
     /****************************/
@@ -115,9 +117,6 @@ public class Rational extends Number implements Comparable<Number>
         }
         if (n == 0) {
             return new Rational(1);
-        }
-        if (n == 1) {
-            return this;
         }
         return times(raisedToThePowerOf(n - 1));
     }

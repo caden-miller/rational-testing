@@ -125,6 +125,10 @@ public class RationalTest
         // Given I have created a 'Rational' value using '-1' and 'MIN_VALUE'
         // Then the constructor should throw an `IllegalArgumentException`
         assertThrows(IllegalArgumentException.class, () -> new Rational(-1, Integer.MIN_VALUE));
+
+        // Given I have created a 'Rational' value using 'MIN_VALUE' and 'MIN_VALUE'
+        // Then the constructor should throw an `IllegalArgumentException`
+        assertThrows(IllegalArgumentException.class, () -> new Rational(Integer.MIN_VALUE, Integer.MIN_VALUE));
     }
 
 
