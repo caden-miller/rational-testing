@@ -67,7 +67,7 @@ public class Rational extends Number implements Comparable<Number>
     /*          Methods         */
     /****************************/
     public Rational opposite() {
-        return longRational((long)(-1 * numerator()), (long)denominator());
+        return longRational(-1 * (long)numerator(), (long)denominator());
     }
 
     public Rational reciprocal() {
