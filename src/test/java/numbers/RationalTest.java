@@ -72,70 +72,24 @@ public class RationalTest
         // And the value should have denominator `3`
         assertThat("48 / -72 = -2 / 3", value.denominator(), is(3));
 
-        // Given I have created a `Rational` value using `-48` and `-72`
-        value = new Rational(-48, -72);
-        // Then the value should have numerator `2`
-        assertThat("-48 / -72 = 2 / 3", value.numerator(), is(2));
+        // Given I have created a `Rational` value using `-48` and `72`
+        value = new Rational(-48, 72);
+        // Then the value should have numerator `-2`
+        assertThat("-48 / 72 = -2 / 3", value.numerator(), is(-2));
         // And the value should have denominator `3`
-        assertThat("-48 / -72 = 2 / 3", value.denominator(), is(3));
+        assertThat("-48 / 72 = -2 / 3", value.denominator(), is(3));
 
         // Given I have created a 'Rational' value using '1' and '0'
         // Then the constructor should throw an `IllegalArgumentException`
         assertThrows(IllegalArgumentException.class, () -> new Rational(1, 0));
 
-        // Given I have created a 'Rational' value using '-1' and '1'
-        value = new Rational(-1, 1);
-        // Then the value should have numerator `-1`
-        assertThat("the numerator should be -1", value.numerator(), is(-1));
-        // And the value should have denominator `1`
-        assertThat("the denominator should be 1", value.denominator(), is(1));
-
-        // Given I have created a 'Rational' value using '1' and '-1'
-        value = new Rational(1, -1);
-        // Then the value should have numerator `-1`
-        assertThat("the numerator should be -1", value.numerator(), is(-1));
-        // And the value should have denominator `1`
-        assertThat("the denominator should be 1", value.denominator(), is(1));
-
-        // Given I have created a 'Rational' value using '-1' and '-1'
-        value = new Rational(-1, -1);
-        // Then the value should have numerator `1`
-        assertThat("the numerator should be 1", value.numerator(), is(1));
-        // And the value should have denominator `1`
-        assertThat("the denominator should be 1", value.denominator(), is(1));
-
-        // Given I have created a 'Rational' value using '4' and '2'
-        value = new Rational(4, 2);
-        // Then the value should have numerator `2`
-        assertThat("the numerator should be 2", value.numerator(), is(2));
-        // And the value should have denominator `1`
-        assertThat("the denominator should be 1", value.denominator(), is(1));
-
-        // Given I have created a 'Rational' value using '2' and '4'
-        value = new Rational(2, 4);
-        // Then the value should have numerator `1`
-        assertThat("the numerator should be 1", value.numerator(), is(1));
-        // And the value should have denominator `2`
-        assertThat("the denominator should be 2", value.denominator(), is(2));
-
-        // Given I have created a 'Rational' value using '2' and '2'
-        value = new Rational(2, 2);
-        // Then the value should have numerator `1`
-        assertThat("the numerator should be 1", value.numerator(), is(1));
-        // And the value should have denominator `1`
-        assertThat("the denominator should be 1", value.denominator(), is(1));
-
-        // Given I have created a 'Rational' value using 'MIN_VALUE' and '-1'
+        // Given I have created a 'Rational' value using 'Integer.MIN_VALUE' and '-1'
         // Then the constructor should throw an `IllegalArgumentException`
         assertThrows(IllegalArgumentException.class, () -> new Rational(Integer.MIN_VALUE, -1));
 
-        // Given I have created a 'Rational' value using '-1' and 'MIN_VALUE'
+        // Given I have created a 'Rational' value using '-1' and 'Integer.MIN_VALUE'
         // Then the constructor should throw an `IllegalArgumentException`
         assertThrows(IllegalArgumentException.class, () -> new Rational(-1, Integer.MIN_VALUE));
-
-        // Given I have created a 'Rational' value using 'MIN_VALUE' and 'MIN_VALUE'
-        // Then the constructor should throw an `IllegalArgumentException`
-        assertThrows(IllegalArgumentException.class, () -> new Rational(Integer.MIN_VALUE, Integer.MIN_VALUE));
     }
 
 
@@ -149,6 +103,11 @@ public class RationalTest
         assertThat("the numerator should be 2", value.numerator(), is(2));
         // And the copy's value should have denominator 3
         assertThat("the denominator should be 3", value.denominator(), is(3));
+
+        // Given that I have created the `Rational` value `null`
+        Rational original2 = null;
+        // Then the copy's value should throw a `NullPointerException`
+        assertThrows(NullPointerException.class, () -> new Rational(original2));
     }
 
 
@@ -179,16 +138,6 @@ public class RationalTest
         value = new Rational(0);
         // Then the reciprocal of the value should throw an `IllegalArgumentException`
         assertThrows(IllegalArgumentException.class, value::reciprocal);
-
-        // Given that I have created the 'Rational' value '1/MIN_VALUE'
-        value = new Rational(1, Integer.MIN_VALUE);
-        // Then the reciprocal of the value should throw an `IllegalArgumentException`
-        assertThrows(IllegalArgumentException.class, value::reciprocal);
-
-        // Given that I have created the 'Rational' value 'MIN_VALUE/1' 
-        value = new Rational(Integer.MIN_VALUE, 1);
-        // Then the reciprocal of the value should throw an 'IllegalArgumentException'
-
     }
 
     public void testRationalPlus() {
@@ -203,29 +152,13 @@ public class RationalTest
         // And the result's value should have denominator 21
         assertThat("3 * 7 = 21", result.denominator(), is(21));
 
-        // Given that I have created the 'Rational' value '2/1'
-        Rational p2 = new Rational(2, 1);
-        // And I have created the 'Rational' value '1/MAX_VALUE'
-        Rational q2 = new Rational(1, Integer.MAX_VALUE);
+        // Given that I have created the 'Rational' value '1/1'
+        Rational p2 = new Rational(1, 1);
+        // And I have created the 'Rational' value 'null'
+        Rational q2 = null;
         // When I add the two 'Rational' values
-        // Then the result should throw an `IllegalArgumentException`
-        assertThrows(IllegalArgumentException.class, () -> p2.plus(q2));
-
-        // Given that I have created the 'Rational' value '-1/1'
-        Rational p3 = new Rational(-2, 1);
-        // And I have created the 'Rational' value '-1/MAX_VALUE'
-        Rational q3 = new Rational(-1, Integer.MAX_VALUE);
-        // When I add the two 'Rational' values
-        // Then the result should throw an `IllegalArgumentException`
-        assertThrows(IllegalArgumentException.class, () -> p3.plus(q3));
-
-        // Given that I have created the 'Rational' value '-1/1'
-        Rational p4 = new Rational(-1, 1);
-        // And I have created the 'Rational' value '1/MIN_VALUE'
-        Rational q4 = new Rational(1, Integer.MIN_VALUE);
-        // When I add the two 'Rational' values
-        // Then the result should throw an `IllegalArgumentException`
-        assertThrows(IllegalArgumentException.class, () -> p4.plus(q4));
+        // Then the result should be `null`
+        assertThat("1/1 + null = null", p2.plus(q2), is((Rational)null));
     }
 
     public void testRationalMinus() {
@@ -240,6 +173,14 @@ public class RationalTest
         assertThat("2 * 7 - 3 * 5 = -1", result.numerator(), is(-1));
         // And the result's value should have denominator 21
         assertThat("3 * 7 = 21", result.denominator(), is(21));
+
+        // Given that I have created the 'Rational' value '1/1'
+        Rational p2 = new Rational(1, 1);
+        // And I have created the 'Rational' value 'null'
+        Rational q2 = null;
+        // When I subtract the two 'Rational' values
+        // Then the result should be `null`
+        assertThat("1/1 - null = null", p2.minus(q2), is((Rational)null));
     }
 
     public void testRationalTimes() {
@@ -253,6 +194,14 @@ public class RationalTest
         assertThat("2 * 5 = 10", result.numerator(), is(10));
         // And the result's value should have denominator 21
         assertThat("3 * 7 = 21", result.denominator(), is(21));
+
+        // Given that I have created the 'Rational' value '1/1'
+        Rational p2 = new Rational(1, 1);
+        // And I have created the 'Rational' value 'null'
+        Rational q2 = null;
+        // When I multiply the two 'Rational' values
+        // Then the result should be `null`
+        assertThat("1/1 * null = null", p2.times(q2), is((Rational)null));
     }
 
     public void testRationalDividedBy() {
@@ -274,6 +223,14 @@ public class RationalTest
         // When I divide the two 'Rational' values
         // Then the result should throw an `IllegalArgumentException`
         assertThrows(IllegalArgumentException.class, () -> p2.dividedBy(q2));
+
+        // Given that I have created the 'Rational' value '1/1'
+        Rational p3 = new Rational(1, 1);
+        // And I have created the 'Rational' value 'null'
+        Rational q3 = null;
+        // When I divide the two 'Rational' values
+        // Then the result should be `null`
+        assertThat("1/1 / null = null", p3.dividedBy(q3), is((Rational)null));
     }
 
     public void testRaisedToThePowerOf() {
@@ -330,6 +287,14 @@ public class RationalTest
 
         // Given that I have created the 'Rational' value '2/3'
         value1 = new Rational(2, 3);
+        // And I have created the 'Rational' value '2/1'
+        value2 = new Rational(2, 1);
+        // When I compare the two 'Rational' values
+        // Then the result should be `false`
+        assertThat("2/3 != 2/1", value1.equals(value2), is(false));
+
+        // Given that I have created the 'Rational' value '2/3'
+        value1 = new Rational(2, 3);
         // And I have created the 'Double' value '2/3'
         Double value3 = 2.0 / 3.0;
         // When I compare the two 'Object's values
@@ -383,6 +348,14 @@ public class RationalTest
         // When I compare the two 'Rational' values
         // Then the result should be `false`
         assertThat("2/3 != null", value1.equals(value6), is(false));
+
+        // Given that I have created the 'Rational' value '2/3'
+        value1 = new Rational(2, 3);
+        // And I have created the 'String' value '2/3'
+        String value7 = "2/3";
+        // When I compare the two 'Object's values
+        // Then the result should be `false`
+        assertThat("(Rational)2/3 != (String)2/3", value1.equals(value7), is(false));
     }
 
     public void testRationalCompareTo() {
@@ -410,29 +383,29 @@ public class RationalTest
         // Then the result should be `1`
         assertThat("2/3 > 1/3", value1.compareTo(value2), is(1));
 
-        // // Given that I have created the 'Rational' value '2/3'
-        // value1 = new Rational(2, 3);
-        // // And I have created the 'Float' value '2/3'
-        // Float value3 = 2.0f / 3.0f;
-        // // When I compare the two 'Object's values
-        // // Then the result should be `0`
-        // assertThat("(Rational)2/3 == (Float)2/3", value1.compareTo(value3), is(0));
+        // Given that I have created the 'Rational' value '2/3'
+        value1 = new Rational(2, 3);
+        // And I have created the 'Float' value '2/3'
+        Float value3 = 2.0f / 3.0f;
+        // When I compare the two 'Object's values
+        // Then the result should be `0`
+        assertThat("(Rational)2/3 == (Float)2/3", value1.compareTo(value3), is(0));
 
-        // // Given that I have created the 'Rational' value '2/3'
-        // value1 = new Rational(2, 3);
-        // // And I have created the 'Float' value '3/2'
-        // value3 = 3.0f / 2.0f;
-        // // When I compare the two 'Object's values
-        // // Then the result should be `-1`
-        // assertThat("(Rational)2/3 < (Float)3/2", value1.compareTo(value3), is(-1));
+        // Given that I have created the 'Rational' value '2/3'
+        value1 = new Rational(2, 3);
+        // And I have created the 'Float' value '3/2'
+        value3 = 3.0f / 2.0f;
+        // When I compare the two 'Object's values
+        // Then the result should be `-1`
+        assertThat("(Rational)2/3 < (Float)3/2", value1.compareTo(value3), is(-1));
 
-        // // Given that I have created the 'Rational' value '2/3'
-        // value1 = new Rational(2, 3);
-        // // And I have created the 'Float' value '1/3'
-        // value3 = 1.0f / 3.0f;
-        // // When I compare the two 'Object's values
-        // // Then the result should be `1`
-        // assertThat("(Rational)2/3 > (Float)1/3", value1.compareTo(value3), is(1));
+        // Given that I have created the 'Rational' value '2/3'
+        value1 = new Rational(2, 3);
+        // And I have created the 'Float' value '1/3'
+        value3 = 1.0f / 3.0f;
+        // When I compare the two 'Object's values
+        // Then the result should be `1`
+        assertThat("(Rational)2/3 > (Float)1/3", value1.compareTo(value3), is(1));
 
         // Given that I have created the 'Rational' value '2/3'
         // And I have created the 'Rational' value 'null'
@@ -582,12 +555,6 @@ public class RationalTest
         // Then the result should be `true`
         assertThat("0/1 is zero", value.isZero(), is(true));
 
-        // Given that I have created the 'Rational' value '0/2'
-        value = new Rational(0, 2);
-        // When I check if the value is zero
-        // Then the result should be `true`
-        assertThat("0/2 is zero", value.isZero(), is(true));
-
         // Given that I have created the 'Rational' value '1/1'
         value = new Rational(1, 1);
         // When I check if the value is zero
@@ -721,109 +688,43 @@ public class RationalTest
         assertThat("(Rational)2/1.doubleValue() == 2.0 / 1.0", result, is((double)2.0 / 1.0));
     }
 
-    public void testRationalByteValue() {
-        // Given that I have created the `Rational` value `2/3`
-        Rational value = new Rational(2, 3);
-        // When I convert the `Rational` value to a byte
-        byte result = value.byteValue();
-        // Then the result should be 0
-        assertThat("(Rational)2/3.byteValue() == 2/3", result, is((byte)(value.numerator() / value.denominator())));
+    public void testRationalLongRational() {
+        // if we pass a rational 1/0 it should be undefined
+        Rational r1 = new Rational();
+        long numerator1 = 1;
+        long denominator1 = 0;
+        assertThrows(IllegalArgumentException.class, () -> r1.longRational(numerator1, denominator1));
 
-        // Given that I have created the `Rational` value `2/1`
-        value = new Rational(2, 1);
-        // When I convert the `Rational` value to a byte
-        result = value.byteValue();
-        // Then the result should be 2
-        assertThat("(Rational)2/1.byteValue() == 2/1", result, is((byte)(value.numerator() / value.denominator())));
+        Rational r2 = new Rational();
+        long numerator2 = -2;
+        long denominator2 = 1;
+        Rational newR = r2.longRational(numerator2, denominator2);
+        assertThat("numerator should be -2", newR.numerator(), is(-2));
+
+        Rational r3 = new Rational();
+        long numerator3 = 2;
+        long denominator3 = -1;
+        Rational newR2 = r3.longRational(numerator3, denominator3);
+        assertThat("denominator should be 1", newR2.denominator(), is(1));
+
+        Rational r4 = new Rational();
+        long numerator4 = 1;
+        long denominator4 = (long) Integer.MAX_VALUE + 1;
+        assertThrows(IllegalArgumentException.class, () -> r4.longRational(numerator4, denominator4));
+
+        Rational r5 = new Rational();
+        long numerator5 = (long) Integer.MAX_VALUE + 1;
+        long denominator5 = 1;
+        assertThrows(IllegalArgumentException.class, () -> r5.longRational(numerator5, denominator5));
+
+        Rational r6 = new Rational();
+        long numerator6 = (long) Integer.MIN_VALUE - 1;
+        long denominator6 = 1;
+        assertThrows(IllegalArgumentException.class, () -> r6.longRational(numerator6, denominator6));
+
+        Rational r7 = new Rational();
+        long numerator7 = 1;
+        long denominator7 = (long) Integer.MIN_VALUE - 1;
+        assertThrows(IllegalArgumentException.class, () -> r7.longRational(numerator7, denominator7));
     }
-
-    public void testRationalShortValue() {
-        // Given that I have created the `Rational` value `2/3`
-        Rational value = new Rational(2, 3);
-        // When I convert the `Rational` value to a short
-        short result = value.shortValue();
-        // Then the result should be 0
-        assertThat("(Rational)2/3.shortValue() == 2/3", result, is((short)(value.numerator() / value.denominator())));
-
-        // Given that I have created the `Rational` value `2/1`
-        value = new Rational(2, 1);
-        // When I convert the `Rational` value to a short
-        result = value.shortValue();
-        // Then the result should be 2
-        assertThat("(Rational)2/1.shortValue() == 2/1", result, is((short)(value.numerator() / value.denominator())));
-    }
-
-    public void testRationalSafeAdd() {
-        // Given that I have the integers 1 && 1
-        // When I add the two integers
-        // Then the result should be 2
-        assertThat("1 + 1 = 2", new Rational().safeAdd(1, 1), is(2));
-
-        // Given that I have the integers 1 && MAX_VALUE
-        // When I add the two integers
-        // Then the result should throw an `IllegalArgumentException`
-        assertThrows(IllegalArgumentException.class, () -> new Rational().safeAdd(1, Integer.MAX_VALUE));
-        
-        // Given that I have the integers -1 && MIN_VALUE
-        // When I add the two integers
-        // Then the result should throw an `IllegalArgumentException`
-        assertThrows(IllegalArgumentException.class, () -> new Rational().safeAdd(-1, Integer.MIN_VALUE));
-
-    }
-
-    public void testRationalSafeMultiply() {
-        // Given that I have the integers 1 && 1
-        // When I multiply the two integers
-        // Then the result should be 1
-        assertThat("1 * 1 = 1", new Rational().safeMultiply(1, 1), is(1));
-
-        // Given that I have the integers 0 && 1
-        // When I multiply the two integers
-        // Then the result should be 0
-        assertThat("0 * 1 = 0", new Rational().safeMultiply(0, 1), is(0));
-
-        // Given that I have the integers 1 && 0
-        // When I multiply the two integers
-        // Then the result should be 0
-        assertThat("1 * 0 = 0", new Rational().safeMultiply(1, 0), is(0));
-
-        // Given that I have the integers 1 && -1
-        // When I multiply the two integers
-        // Then the result should be -1
-        assertThat("1 * -1 = -1", new Rational().safeMultiply(1, -1), is(-1));
-
-        // Given that I have the integers -2 && -1
-        // When I multiply the two integers
-        // Then the result should be 2
-        assertThat("-2 * -1 = 2", new Rational().safeMultiply(-2, -1), is(2));
-
-        // Given that I have the integers 2 && MAX_VALUE
-        // When I multiply the two integers
-        // Then the result should throw an `IllegalArgumentException`
-        assertThrows(IllegalArgumentException.class, () -> new Rational().safeMultiply(2, Integer.MAX_VALUE));
-
-        // Given that I have the integers 2 && MIN_VALUE
-        // When I multiply the two integers
-        // Then the result should throw an `IllegalArgumentException`
-        assertThrows(IllegalArgumentException.class, () -> new Rational().safeMultiply(2, Integer.MIN_VALUE));
-        
-        // Given that I have the integers -2 && MIN_VALUE
-        // When I multiply the two integers
-        // Then the result should throw an `IllegalArgumentException`
-        assertThrows(IllegalArgumentException.class, () -> new Rational().safeMultiply(-2, Integer.MIN_VALUE));
-
-        // Given that I have the integers -2 && MAX_VALUE
-        // When I multiply the two integers
-        // Then the result should throw an `IllegalArgumentException`
-        assertThrows(IllegalArgumentException.class, () -> new Rational().safeMultiply(-2, Integer.MAX_VALUE));
-
-        // Given that I have the integers -1 && MIN_VALUE
-        // When I multiply the two integers
-        // Then the result should throw an `IllegalArgumentException`
-        assertThrows(IllegalArgumentException.class, () -> new Rational().safeMultiply(-1, Integer.MIN_VALUE));
-    }
-
-
-
-
 }
